@@ -11,7 +11,7 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     permissions:
       contents: read #This is required for actions/checkout
 
@@ -28,7 +28,7 @@ jobs:
           npm install
           npm run build --if-present
           npm run test --if-present
-      
+
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
@@ -51,13 +51,13 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_E442CE7C5D0B4DD09B88FC7A71804E65 }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_AB4793CFBA6746F7940D0A3D7D09C12F }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_917B5CEFC734450EB3048C8F0FBB3ED9 }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_7474FD4BD26A4111A4BB7090D6618857 }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_65713650C28A41309001C28255D8892B }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_D468A7832C5140D3955C027803B38F28 }}
 
       - name: 'Deploy to Azure Web App'
-        uses: azure/webapps-deploy@v3
         id: deploy-to-webapp
+        uses: azure/webapps-deploy@v3
         with:
           app-name: 'chat-saas-rg'
           slot-name: 'Production'
